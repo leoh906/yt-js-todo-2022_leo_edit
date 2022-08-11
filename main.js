@@ -1,17 +1,19 @@
-window.addEventListener('load', () => {
-	todos = JSON.parse(localStorage.getItem('todos')) || [];
+window.addEventListener('load', () => { // This creates an event listener for the whole page
+	todos = JSON.parse(localStorage.getItem('todos')) || []; /// This will get our todos array
 	const nameInput = document.querySelector('#name');
-	const newTodoForm = document.querySelector('#new-todo-form');
+	const newTodoForm = document.querySelector('#new-todo-form'); // We created two constants
 
-	const username = localStorage.getItem('username') || '';
+	const username = localStorage.getItem('username') || ''; 
+	// This will return the username that was originally given
 
 	nameInput.value = username;
 
 	nameInput.addEventListener('change', (e) => {
 		localStorage.setItem('username', e.target.value);
+		// If the username is changed, this listener changes the previous value
 	})
 
-	newTodoForm.addEventListener('submit', e => {
+	newTodoForm.addEventListener('submit', e => { 
 		e.preventDefault();
 
 		const todo = {
@@ -28,7 +30,7 @@ window.addEventListener('load', () => {
 		// Reset the form
 		e.target.reset();
 
-		DisplayTodos()
+		DisplayTodos() // Calls the function that creates todos
 	})
 
 	DisplayTodos()
