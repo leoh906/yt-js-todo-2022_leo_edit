@@ -1,22 +1,39 @@
 window.addEventListener('load', () => { // This creates an event listener for the whole page
-	todos = JSON.parse(localStorage.getItem('todos')) || []; /// This will get our todos array
+	// i.e. When the page is loaded all these things happen upon instance
+	// It loads the content of the page
+	todos = JSON.parse(localStorage.getItem('todos')) || []; 
+// Line 4: The page will load the todos items in storage or it will return an array literal that
+// can't be overridden
 	const nameInput = document.querySelector('#name');
-	const newTodoForm = document.querySelector('#new-todo-form'); // We created two constants
+	// Line 7: Adds a constant for the input tax in html with an id of name
+	const newTodoForm = document.querySelector('#new-todo-form'); 
+	// Line 9: Adds a constant for the form in html with an id of new-todo-form
 
 	const username = localStorage.getItem('username') || ''; 
-	// This will return the username that was originally given
+	// Line 12: This line will get the stored username item from locaStorage or will return blank 
+	// if one doesn't exist
 
 	nameInput.value = username;
+	// Line 16: This will set the value of nameInput to the username const variable
+	// If there is a username it is stored as username. Otherwise it is blank
 
 	nameInput.addEventListener('change', (e) => {
+	// Line 21: Creates an eventListener to watch if the nameInput value was changed
+	// 'change' only works for input,select,textarea html tags
+	// e is the shorthand reference for event 
 		localStorage.setItem('username', e.target.value);
-		// If the username is changed, this listener changes the previous value
+		// If the username is changed, this listener changes the previous value to the target value
 	})
 
 	newTodoForm.addEventListener('submit', e => { 
+	// Line 28: Gets the content newTodoForm (remember the HTML Form) and adds an event listener
+	// Uses the submit event (only works with form to create changes)
 		e.preventDefault();
+		// The preventDefault prevents the page from refreshing after every submission
 
 		const todo = {
+			// Line 35: todo becomes the name of the array literal whether it is empty or not
+			// The following adds information to localStorage
 			content: e.target.elements.content.value,
 			category: e.target.elements.category.value,
 			done: false,
@@ -24,21 +41,26 @@ window.addEventListener('load', () => { // This creates an event listener for th
 		}
 
 		todos.push(todo);
+		// Line 44: This will add contents from todo constant and will "push" the content to the array literal
 
 		localStorage.setItem('todos', JSON.stringify(todos));
+		// The setItem will create (keyName,keyValue) for our data. By default the keyname will alwaus read todos
 
-		// Reset the form
 		e.target.reset();
+		// Line 45: Resets the form after submission
 
-		DisplayTodos() // Calls the function that creates todos
+		DisplayTodos() // Calls the function that displays todos (see line 58)
 	})
 
 	DisplayTodos()
-})
+}) // The end of the window load thingy
 
 function DisplayTodos () {
+	// Line 58: This is a new function that will only run when called
 	const todoList = document.querySelector('#todo-list');
+	// Line 60: From the html document it will get the blank div with an id of todo-list
 	todoList.innerHTML = "";
+	// Line 62: This will set the todoList innerHTML to "blank"
 
 	todos.forEach(todo => {
 		const todoItem = document.createElement('div');
