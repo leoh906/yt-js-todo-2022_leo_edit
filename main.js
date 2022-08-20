@@ -34,7 +34,7 @@ window.addEventListener('load', () => { // This creates an event listener for th
 	})
 
 	DisplayTodos()
-})
+}) // Ends the window.addEventListener
 
 function DisplayTodos () {
 	const todoList = document.querySelector('#todo-list');
@@ -116,5 +116,5 @@ function DisplayTodos () {
 			DisplayTodos()
 		})
 
-	})
+	}) // Ends the foreach loop
 }
